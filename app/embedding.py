@@ -52,13 +52,9 @@ def build_docs(data):
 
 
 def create_embeddings():
-
+    model = get_model()
     catalog=load_catalog()
-
     docs=build_docs(catalog)
-
-    emb=model.encode(
-            docs
-    )
+    emb=model.encode(docs)
 
     return emb,catalog

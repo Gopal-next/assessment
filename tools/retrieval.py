@@ -4,7 +4,7 @@ import numpy as np
 from app.vectorestore import index
 from app.embedding import load_catalog, get_model
 
-model = get_model()
+
 catalog = load_catalog()
 
 @tool
@@ -45,7 +45,8 @@ def guardrails(query:str):
     return False
 
 
-def search_assessments(query):    
+def search_assessments(query):  
+    model = get_model()  
     emb = model.encode([query])
     D, I = index.search(
         np.array(emb, dtype=np.float32),
