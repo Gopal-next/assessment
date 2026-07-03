@@ -2,9 +2,9 @@ from langchain.tools import tool
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from app.vectorestore import index
-from app.embedding import load_catalog
+from app.embedding import load_catalog, get_model
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = get_model()
 catalog = load_catalog()
 
 @tool
