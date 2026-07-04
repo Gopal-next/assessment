@@ -1,10 +1,9 @@
 from langchain.tools import tool
-from sentence_transformers import SentenceTransformer
 import numpy as np
 from app.vectorestore import index
 from app.embedding import load_catalog, get_model
 
-
+model = get_model()
 catalog = load_catalog()
 
 @tool
@@ -45,17 +44,18 @@ def guardrails(query:str):
     return False
 
 
-def search_assessments(query):  
-    model = get_model()  
-    emb = model.encode([query])
-    D, I = index.search(
-        np.array(emb, dtype=np.float32),
-        5
-    )
+def search_assessments(query):
 
-    return [
-        catalog[i]for i in I[0]
-        ]
+    emb = model.embed_query(query)
+
+    emb = np.asarray(
+        emb,
+        dtype=np.float32
+    ).reshape(1, -1)
+
+    D, I = index.search(emb, 5)
+
+    return [catalog[i] for i in I[0]]
 
 @tool
 def retrieve_assessments(query: str):

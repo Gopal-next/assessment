@@ -7,15 +7,8 @@ app = FastAPI()
 
 memory = []
 @app.get("/health")
+
 def health():
-    db_ok = False  # example check
-
-    if not db_ok:
-        raise HTTPException(
-            status_code=503,
-            detail="Service unhealthy: database not reachable"
-        )
-
     return {"status": "ok"}
 
 
@@ -26,7 +19,7 @@ def chat(req: ChatRequest):
         if msg not in memory:
             memory.append(msg)
 
-            
+
     history = "\n".join(
         f"{m.role}: {m.content}"
         for m in memory
