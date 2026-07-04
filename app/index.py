@@ -70,7 +70,7 @@ index = faiss.IndexFlatL2(
 
 index.add(embeddings)
 
-faiss.write_index(
+index = faiss.write_index(
     index,
     r"D:\\SHL_assessment\\data\\index.faiss"
 )
