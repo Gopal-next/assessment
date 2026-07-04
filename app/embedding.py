@@ -76,10 +76,3 @@ def create_embeddings():
 
     return emb,catalog
 
-
-
-# def load_catalog():
-#     path = Path("data/shl_product_catalog.json")
-
-#     with open(path, encoding="utf8") as f:
-#         return json.load(f)
