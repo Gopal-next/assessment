@@ -3,7 +3,10 @@ import warnings
 from pathlib import Path
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
+from pathlib import Path
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -23,10 +26,17 @@ def get_model():
         )
 
     return model
+#local
+# def load_catalog():
 
+#     with open("D:\SHL_assessment\data\shl_product_catalog.json",encoding='utf8') as f:
+
+#         data=json.load(f)
+
+#     return data
 def load_catalog():
 
-    with open("D:\SHL_assessment\data\shl_product_catalog.json",encoding='utf8') as f:
+    with open(BASE_DIR / "data" / "shl_product_catalog.json",encoding='utf8') as f:
 
         data=json.load(f)
 

@@ -2,13 +2,21 @@ import json
 import faiss
 import numpy as np
 import time
-
+from pathlib import Path
 from embedding import get_model
 
-model = get_model()
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+model = get_model()
+# local
+# with open(
+#     r"D:\\SHL_assessment\\data\\shl_product_catalog.json",
+#     encoding="utf8"
+# ) as f:
+#     catalog = json.load(f)
 with open(
-    r"D:\\SHL_assessment\\data\\shl_product_catalog.json",
+    BASE_DIR / "data" / "shl_product_catalog.json",
     encoding="utf8"
 ) as f:
     catalog = json.load(f)
@@ -69,10 +77,14 @@ index = faiss.IndexFlatL2(
 )
 
 index.add(embeddings)
+# local
+# index = faiss.write_index(
+#     index,
+#     r"D:\\SHL_assessment\\data\\index.faiss"
+# )
 
 index = faiss.write_index(
     index,
-    r"D:\\SHL_assessment\\data\\index.faiss"
+    str(BASE_DIR / "data" / "index.faiss")
 )
-
 print("FAISS index saved")
